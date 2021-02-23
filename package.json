@@ -21,6 +21,7 @@
     "memorystorage": "^0.12.0",
     "pg": "^8.5.1",
     "randomstring": "^1.1.5",
-    "sequential-ids": "0.0.0"
+    "sequential-ids": "0.0.0",
+    "winston": "^3.3.3"
   }
 }
