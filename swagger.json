@@ -1,0 +1,87 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Note & Books API",
+      "description": "Note & Books API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Note & Books",
+        "description": "API"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+    "/api/v1/books": {
+        "get": {
+            "description": "Returns all BOOKS from the system that the user has access to",
+            "produces": [
+            "application/json"
+            ],
+            "responses": {
+            "200": {
+                "description": "A list of books.",
+                "schema": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/books"
+                }
+                }
+            }
+            }
+        }
+        }
+    },
+    "definitions":{
+        "book":{
+            "required":[
+                "title",
+                "isbn",
+                "publisher",
+                "author"
+            ],
+            "properties":{
+                "bookId":{
+                    "type":"integer"
+                },
+                "title":{
+                    "type":"string"
+                },
+                "isbn":{
+                    "type":"string"
+                },
+                "description":{
+                    "type":"string"
+                },
+                "publisher":{
+                    "type":"string"
+                },
+                "author":{
+                    "type":"string"
+                },
+                "pages":{
+                    "type":"integer"
+                }
+            }
+        },
+        "books":{
+            "$ref": "#/definitions/book"
+        }
+    }
+  }
+  

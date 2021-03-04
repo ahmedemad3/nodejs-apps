@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var noteRoute = require('./route/noteRoute');
 var storeRoute = require('./route/store.route');
 var bookRoute = require('./route/book.route');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 var app = express();
 
@@ -14,7 +16,9 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.get("/" , function(req , res) {
@@ -26,6 +30,8 @@ app.use("/api/v1" , storeRoute);
 app.use("/api/v1" , bookRoute);
 
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log(`Server start ....... `)
 })
+
+module.exports = app

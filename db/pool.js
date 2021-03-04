@@ -4,8 +4,8 @@ dotenv.config();
 
 const db_config = {
     connectionString: process.env.DATABASE_URL,
-    connectionTimeoutMillis: 300,
-    idleTimeoutMillis: 200,
+    connectionTimeoutMillis: 300000,
+    idleTimeoutMillis: 300000,
     max: 20,
   }
 
