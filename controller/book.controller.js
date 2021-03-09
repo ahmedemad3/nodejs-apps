@@ -4,6 +4,9 @@ var util = require('../Util/utility');
 var Logger = require('../services/logger.service');
 var auditService = require('../audit/audit.service');
 var auditAction = require('../audit/auditAction');
+var APIError = require('../error/api.error');
+var errorStatus = require('../error/error.status');
+var errorType = require('../error/error.type');
 
 const logger = new Logger('book.controller');
 
@@ -26,12 +29,22 @@ exports.getBookList = async (req , res) => {
  exports.getBookDetails = async (req , res) => {
     try {
          var bookId = req.params.bookId;
-         var bookDetailsQuery = queries.queryList.GET_BOOK_DETAILS_QUERY;
-         var result = await dbConnection.dbQuery(bookDetailsQuery , [bookId]);
-         return res.status(200).send(JSON.stringify(result.rows[0]));
+         console.log("bookId : " + bookId);
+         if (isNaN(bookId))
+            throw new APIError(errorType.API_ERROR , 
+            errorStatus.INTERNAL_SERVER_ERROR ,
+             "Invalid bookId , is not a number , bookId value is : " + bookId , 
+             true);
+        
+        var bookDetailsQuery = queries.queryList.GET_BOOK_DETAILS_QUERY;
+        var result = await dbConnection.dbQuery(bookDetailsQuery , [bookId]);
+        return res.status(200).send(JSON.stringify(result.rows[0]));
     } catch (err) {
-        console.log("Error : " + err);
-         return res.status(500).send({error : 'Failed to get book details'});
+        console.log("Error : " + err.description);
+        if(err.name === errorType.SQL_INJECTION_ERROR)
+            // handlerError();
+        logger.error("Failed to get Book details " , JSON.stringify(err));
+        return res.status(500).send({error : 'Failed to get book details'});
     }   
  }
 
