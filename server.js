@@ -6,6 +6,7 @@ var noteRoute = require('./route/noteRoute');
 var storeRoute = require('./route/store.route');
 var bookRoute = require('./route/book.route');
 var userRoute = require('./route/user.route');
+var loginRoute = require('./route/login.route');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -30,6 +31,8 @@ app.use("/api/v1" , noteRoute);
 app.use("/api/v1" , storeRoute);
 app.use("/api/v1" , bookRoute);
 app.use("/api/v1" , userRoute);
+app.use("/api/v1" , loginRoute);
+
 
 
 app.listen(4000, () => {
