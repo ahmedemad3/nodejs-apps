@@ -8,6 +8,7 @@ var bookRoute = require('./route/book.route');
 var userRoute = require('./route/user.route');
 var loginRoute = require('./route/login.route');
 var uploadRoute = require('./route/upload.route');
+var exportRoute = require('./route/export.route');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -34,6 +35,7 @@ app.use("/api/v1" , bookRoute);
 app.use("/api/v1" , userRoute);
 app.use("/api/v1" , loginRoute);
 app.use("/api/v1" , uploadRoute);
+app.use("/api/v1" , exportRoute);
 
 
 app.listen(4000, () => {
