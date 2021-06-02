@@ -9,6 +9,7 @@ var userRoute = require('./route/user.route');
 var loginRoute = require('./route/login.route');
 var uploadRoute = require('./route/upload.route');
 var exportRoute = require('./route/export.route');
+var paypalRoute = require('./route/paypal.route');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -34,6 +35,20 @@ app.get("/" , function(req , res) {
     res.sendFile(__dirname + '/index.html')
 });
 
+app.get("/payment" , function(req , res) {
+    // res.send("Server started ........");
+    res.sendFile(__dirname + '/payment.html')
+});
+
+// success page 
+app.get('/success' , (req ,res ) => { 
+    res.sendFile(__dirname + '/success.html')
+})
+// error page 
+app.get('/err' , (req , res) => {
+    res.sendFile(__dirname + '/error.html')
+})
+
 app.use("/api/v1" , noteRoute);
 app.use("/api/v1" , storeRoute);
 app.use("/api/v1" , bookRoute);
@@ -41,6 +56,8 @@ app.use("/api/v1" , userRoute);
 app.use("/api/v1" , loginRoute);
 app.use("/api/v1" , uploadRoute);
 app.use("/api/v1" , exportRoute);
+app.use("/api/v1" , paypalRoute);
+
 
 
 const server= app.listen(4000, () => {
